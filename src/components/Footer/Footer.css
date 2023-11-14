@@ -1,0 +1,14 @@
+/* Footer.css */
+
+footer {
+  padding: 20px;
+  text-align: center;
+  bottom: 0;
+  /* position: absolute; */
+  /* width: 100vw; */
+  & p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+  }
+}

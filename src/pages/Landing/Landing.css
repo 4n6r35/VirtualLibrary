@@ -1,0 +1,36 @@
+/* styles.css */
+
+.landing-container {
+  height: max-content;
+  & header {
+    text-align: center;
+    margin-top: 40px;
+
+    & h1 {
+      font-size: 36px;
+      color: #333;
+    }
+  }
+}
+
+.intro-section {
+  & .ps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 50px;
+
+    & .book {
+      width: 50%;
+      object-fit: contain;
+    }
+  }
+  & a {
+    text-decoration: none;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 10px 30px;
+    border-radius: 50px;
+    margin: 0 50px;
+  }
+}

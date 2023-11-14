@@ -1,0 +1,13 @@
+* {
+  font-family: "JetBrains Mono", monospace;
+
+  --color-primary: #5b9dff;
+  --color-primary-600: #3484fc;
+}
+
+body,
+html {
+  font-family: "JetBrains Mono", monospace;
+  height: auto;
+  margin: 0;
+}
