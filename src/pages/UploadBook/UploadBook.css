@@ -1,0 +1,17 @@
+.upload-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & .upload-content {
+    max-width: 30vw;
+  }
+}
+
+@media (max-width: 500px) {
+  .upload-page {
+    & .upload-content {
+      max-width: 80vw;
+    }
+  }
+}

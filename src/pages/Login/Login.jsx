@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Login.css";
+import TextInput from "../../components/TextInput/TextInput";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -17,22 +18,18 @@ const Login = () => {
       <div className="login-container">
         <h2>Login</h2>
         <form onSubmit={handleLogin}>
-          <div className="form-group">
-            <label>Username</label>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
+          <TextInput
+            onChange={(e) => setUsername(e.target.value)}
+            title={"Username"}
+            value={username}
+            type="text"
+          />
+          <TextInput
+            onChange={(e) => setPassword(e.target.value)}
+            title={"Password"}
+            value={password}
+            type="password"
+          />
           <div className="link-signup">
             <p>Aún no tienes cuenta,</p>
             <a href="/sign-up"> Registrate aquí</a>

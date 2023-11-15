@@ -5,11 +5,11 @@ import "./LayOut.css";
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 
-export const LayOut = () => {
+export const LayOut = ({ type = "login" }) => {
   return (
     <>
       <div className="layout-components">
-        <NavBar />
+        <NavBar type={type} />
         <div className="content">
           <Outlet />
         </div>
