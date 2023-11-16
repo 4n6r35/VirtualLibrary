@@ -7,6 +7,7 @@ import SignUp from "../pages/SignUp/SignUp";
 import Error404 from "../pages/404/404";
 import Books from "../pages/Books/Books";
 import UploadBook from "../pages/UploadBook/UploadBook";
+import DetailsBook from "../pages/DetailsBook/DetailsBook";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
     element: <LayOut type="user" />,
     children: [
       { path: "/books", element: <Books /> },
+      { path: "/books/:id", element: <DetailsBook /> },
       // { path: "/", element: <Books /> },
     ],
   },

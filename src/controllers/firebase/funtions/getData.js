@@ -11,7 +11,11 @@ import { doc, getDoc } from "firebase/firestore";
  */
 
 export const getData = async (id, collection, model) => {
-  const docRef = doc(fireStore, collection, id).withConverter(model);
-  const docSnap = await getDoc(docRef);
-  return docSnap;
+  try {
+    const docRef = doc(fireStore, collection, id).withConverter(model);
+    const docSnap = await getDoc(docRef);
+    return docSnap.data();
+  } catch (error) {
+    console.log(error);
+  }
 };

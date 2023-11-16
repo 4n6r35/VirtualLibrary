@@ -1,8 +1,4 @@
-// Landing.js
-
-// import Card from "../../components/Card/Card";
-
-import { ViewBooks } from "../../components/ViewBook/ViewBook";
+import { ViewBooksL } from "../../components/ViewBook/ViewBook";
 import img from "./../../assets/book.png";
 import "./Landing.css";
 
@@ -58,7 +54,7 @@ const Landing = () => {
         <a href="/login">Comienza tu aventura literaria</a>
       </div>
 
-      <ViewBooks books={book} />
+      <ViewBooksL books={book} />
     </div>
   );
 };

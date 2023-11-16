@@ -13,7 +13,7 @@ const TruncatedText = ({ text, maxLength }) => {
   return <>{truncateText(text, maxLength)}</>;
 };
 
-const Card = ({ title, description, link, text = "Leer", cover }) => {
+const CardLanding = ({ title, description, link, text = "Leer", cover }) => {
   return (
     <div className="card">
       <img src={cover} alt="ImgBook" />
@@ -21,9 +21,9 @@ const Card = ({ title, description, link, text = "Leer", cover }) => {
       <p className="descr">
         <TruncatedText text={description} maxLength={80} />
       </p>
-      <a href={`/books/${link}`}>{text}</a>
+      <a href={`${link}`}>{text}</a>
     </div>
   );
 };
 
-export default Card;
+export default CardLanding;

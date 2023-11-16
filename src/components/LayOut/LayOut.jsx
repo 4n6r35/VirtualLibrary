@@ -13,7 +13,7 @@ export const LayOut = ({ type = "login" }) => {
         <div className="content">
           <Outlet />
         </div>
-        <Footer />
+        {type == "login" ?? <Footer />}
       </div>
     </>
   );
