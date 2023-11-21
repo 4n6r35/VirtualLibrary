@@ -1,0 +1,38 @@
+.upload-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & .upload-content {
+    max-width: 30vw;
+
+    & .buttons {
+      display: flex;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      justify-content: center;
+      & .spacer {
+        margin: 0px auto;
+      }
+    }
+
+    & .file-upload {
+      margin-top: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      border: 1px solid #ccc;
+      display: inline-block;
+      height: 50px;
+      cursor: pointer;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .upload-page {
+    & .upload-content {
+      max-width: 80vw;
+    }
+  }
+}

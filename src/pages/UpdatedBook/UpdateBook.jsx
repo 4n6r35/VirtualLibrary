@@ -1,19 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import TextInput from "../../components/TextInput/TextInput";
 import Button from "../../components/Button/Button";
-
-import "./UploadBook.css";
 import Card from "../../components/Card/Card";
-import { setData } from "../../controllers/firebase/funtions/setData";
+import { useNavigate } from "react-router-dom";
 
-const UploadBook = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+
+//Firebase
+import { updateData } from "../../controllers/firebase/funtions/updateData";
+import { getData } from "../../controllers/firebase/funtions/getData";
+import { modelBook } from "../../controllers/firebase/models/modelBooks";
+
+import "./UpdateBook.css";
+const UpdateBook = () => {
+  const { id } = useParams();
+  const [title, setTitle] = useState();
+  const [description, setDescription] = useState();
   const [stock, setStock] = useState(0);
-  const [link, setLink] = useState("");
-  const [cover, setCover] = useState("");
+  const [link, setLink] = useState();
+  const [cover, setCover] = useState();
 
   const [stateView, setStateView] = useState(false);
+  const navigate = useNavigate();
 
   const changeImage = (e) => {
     const reader = new FileReader();
@@ -25,6 +33,19 @@ const UploadBook = () => {
     };
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getData(id, "Books", modelBook);
+      setCover(data.cover);
+      setDescription(data.description);
+      setTitle(data.title);
+      setLink(data.link);
+      setStock(data.stock);
+    };
+
+    fetchData();
+  }, [id]);
+
   const previewClick = () => {
     if ((title != "") & (description != "") & (link != "") & (cover != "")) {
       setStateView(!stateView);
@@ -34,10 +55,7 @@ const UploadBook = () => {
   };
 
   const uploadClick = async () => {
-    const date = new Date();
-    const id = date.getTime();
     const data = {
-      id: id,
       title: title,
       description: description,
       link: link,
@@ -46,8 +64,8 @@ const UploadBook = () => {
     };
 
     console.log(data);
-    await setData(data, id.toString(), "Books");
-    alert("se agrego con exito");
+    await updateData(data, id, "Books");
+    alert("se actualizo con exito");
     cancelar();
   };
 
@@ -56,8 +74,8 @@ const UploadBook = () => {
     setLink("");
     setDescription("");
     setTitle("");
-
     setStateView(!stateView);
+    navigate("/books")
   };
   return (
     <div className="upload-page">
@@ -79,7 +97,7 @@ const UploadBook = () => {
             <TextInput
               type="number"
               title="Stock"
-              value={description}
+              value={stock}
               onChange={(e) => setStock(e.target.value)}
             />
 
@@ -109,7 +127,7 @@ const UploadBook = () => {
               cover={cover}
             />
             <div className={"buttons"}>
-              <Button onClick={uploadClick} text="Subir Libro" />
+              <Button onClick={uploadClick} text="Actualizar Libro" />
               <div className={"spacer"}></div>
               <Button onClick={cancelar} text="Cancelar" />
             </div>
@@ -119,4 +137,4 @@ const UploadBook = () => {
     </div>
   );
 };
-export default UploadBook;
+export default UpdateBook;

@@ -15,7 +15,6 @@ import { doc, setDoc } from "firebase/firestore";
 export const setData = async (data, id, collection) => {
   try {
     await setDoc(doc(fireStore, collection, id), data);
-    console.log("Saved Data");
   } catch (error) {
     console.log(error);
   }

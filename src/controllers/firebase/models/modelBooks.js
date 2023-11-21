@@ -1,10 +1,11 @@
 class BookModel {
-  constructor(id = "", title = "", description = "", link = "", cover = "") {
+  constructor(id = "", title = "", description = "", link = "", cover = "", stock = "") {
     this.id = id;
     this.title = title;
     this.description = description;
     this.link = link;
     this.cover = cover;
+    this.stock =stock;
   }
 
   toString() {
@@ -17,12 +18,14 @@ class BookModel {
       ", " +
       this.link +
       ", " +
-      this.cover
+      this.cover +
+      ", " +
+      this.stock
     );
   }
 }
 
-export const modelBookModel = {
+export const modelBook = {
   toFirestore: (bookModel) => {
     return {
       id: bookModel.id,
@@ -30,6 +33,7 @@ export const modelBookModel = {
       description: bookModel.description,
       link: bookModel.link,
       cover: bookModel.cover,
+      stock: BookModel.stock
     };
   },
   fromFirestore: (snapshot, options) => {
@@ -39,7 +43,8 @@ export const modelBookModel = {
       data.title,
       data.description,
       data.link,
-      data.cover
+      data.cover,
+      data.stock
     );
   },
 };

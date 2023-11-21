@@ -1,0 +1,12 @@
+.books-order {
+    height: max-content;
+    & header {
+      text-align: center;
+      margin-top: 40px;
+  
+      & h1 {
+        font-size: 36px;
+        color: #5b9dff;
+      }
+    }
+}

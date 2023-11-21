@@ -1,16 +1,20 @@
 import { useState } from "react";
 import { ViewBooks } from "../../components/ViewBook/ViewBook";
 import { useEffect } from "react";
-import { modelBookModel } from "../../controllers/firebase/models/modelBooks";
+import { modelBook } from "../../controllers/firebase/models/modelBooks";
 import { getCollections } from "../../controllers/firebase/funtions/getCollections";
 
 const Books = () => {
   const [books, setBooks] = useState([]);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getCollections("Books", modelBookModel);
-      console.log(data);
+      const json = localStorage.getItem("user");
+      const u = JSON.parse(json);
+      setUser(u);
+      const data = await getCollections("Books", modelBook);
+      // console.log(data);
       setBooks(data);
     };
 
@@ -20,7 +24,7 @@ const Books = () => {
   return (
     <div>
       <div>
-        <ViewBooks books={books} />
+        <ViewBooks books={books} typeUser={user?.typeUser || false} />
       </div>
     </div>
   );

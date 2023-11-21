@@ -13,15 +13,17 @@ const TruncatedText = ({ text, maxLength }) => {
   return <>{truncateText(text, maxLength)}</>;
 };
 
-const Card = ({ title, description, link, text = "Leer", cover }) => {
+const Card = ({ title, description, link, text = "Leer", cover, typeUser }) => {
   return (
     <div className="card">
+      {/* <p className="title">{stock}</p> */}
       <img src={cover} alt="ImgBook" />
       <p className="title">{title}</p>
       <p className="descr">
         <TruncatedText text={description} maxLength={80} />
       </p>
       <a href={`/books/${link}`}>{text}</a>
+      {typeUser ? <a href={`/books/update/${link}`}>Editar</a> : <div></div>}
     </div>
   );
 };

@@ -4,7 +4,9 @@ import CardLanding from "../Card/CardLading";
 
 import "./ViewBook.css";
 
-export const ViewBooks = ({ books = [] }) => {
+//TODO: Validar el link de los books cuando ya se este logueado
+
+export const ViewBooks = ({ books = [], typeUser = false }) => {
   return (
     <div>
       {/* <p>Nuestros libros</p> */}
@@ -12,6 +14,7 @@ export const ViewBooks = ({ books = [] }) => {
         {books.map((item) => {
           return (
             <Card
+              typeUser={typeUser}
               key={item.title} // Se recomienda usar una clave única en cada iteración
               link={item.id}
               cover={item.cover}
