@@ -1,12 +1,9 @@
 import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
-import { useAuth } from "../context/ctx";
 
-export default function ProtectedRoutes() {
-    
-    const auth = useAuth()
+export default function ProtectedRoutes({ children }) {
+  const auth = localStorage.getItem("auth");
+  console.log(auth);
 
-    return auth.isAuthenticated ? <Outlet/> : <Navigate to="/"/>;
+  return auth === "authenticated" ? <Outlet /> : <Navigate to="/" />;
 }
-
-

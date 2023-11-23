@@ -19,14 +19,26 @@ export const useAuth = () => {
 
 export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState();
 
   const _signUp = (email, password) =>
     createUserWithEmailAndPassword(auth, email, password);
-  const _login = (email, password) =>
-    signInWithEmailAndPassword(auth, email, password);
+
+  const _login = (email, password) => {
+    try {
+      const credentials = signInWithEmailAndPassword(auth, email, password);
+      setIsAuthenticated(true);
+      localStorage.setItem("auth", "authenticated");
+      setUser(credentials.user);
+      return credentials;
+    } catch (error) {
+      setIsAuthenticated(false);
+      throw error;
+    }
+  };
 
   return (
-    <authCtx.Provider value={{ isAuthenticated, _signUp, _login }}>
+    <authCtx.Provider value={{ isAuthenticated, user, _signUp, _login }}>
       {children}
     </authCtx.Provider>
   );

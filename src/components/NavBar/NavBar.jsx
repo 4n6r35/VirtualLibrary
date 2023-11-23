@@ -4,7 +4,6 @@ import logo from "./../../assets/logo.svg";
 import "./NavBar.css";
 import { useState, useEffect } from "react";
 import Modal from "../Modal/Modal";
-import { useNavigate } from "react-router-dom";
 const nameNav = "ARESDEV";
 
 const NavBar = () => {
@@ -28,7 +27,7 @@ const NavBar = () => {
 
 const NavBarD = () => {
   const [open, setOpen] = useState("false");
-  const navigate = useNavigate();
+
   const [user, setUser] = useState();
 
   useEffect(() => {
@@ -46,8 +45,9 @@ const NavBarD = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("auth");
     setOpen(true);
-    navigate("/");
+    window.location.reload(true);
   };
 
   const handleClose = () => {

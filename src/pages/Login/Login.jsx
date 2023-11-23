@@ -14,11 +14,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  
-  // const authCheck = useAuth();
-  // if (authCheck.isAuthenticated) {
-  //   return <Navigate to="/"/>
-  // }
 
   const { _login } = useAuth();
   const navigate = useNavigate();
