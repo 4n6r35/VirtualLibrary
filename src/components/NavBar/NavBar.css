@@ -28,21 +28,20 @@
     align-items: center;
     margin-right: 10px;
     & .navbar-link {
+      margin-right: -1px;
       border: 1px solid #5b9dff;
-
-      margin-right: 30px;
       color: #5b9dff;
       text-align: center;
-      border-radius: 5px;
       padding: 8px 15px;
       text-decoration: none;
     }
 
     & .user {
-      width: 45px;
-      height: 45px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background-color: white;
+      margin-left: 10px;
       border: 1px solid var(--color-primary-600);
       display: flex;
       color: var(--color-primary-600);
@@ -63,9 +62,13 @@
 
 @media (max-width: 500px) {
   .navbar {
+    & .navbar-brand {
+      & .brand {
+        font-size: 0px;
+      }
+    }
+
     & .navbar-links {
-      margin-right: 10px;
-      margin-left: 10px;
       & .navbar-link {
         padding: 5px 10px;
         font-size: 0.8rem;

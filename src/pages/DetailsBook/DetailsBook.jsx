@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 
-import { useParams,useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getData } from "../../controllers/firebase/funtions/getData";
 import { modelBook } from "../../controllers/firebase/models/modelBooks";
 import "./DetailsBook.css";
 import Button from "../../components/Button/Button";
 import { orderBooks } from "../../controllers/funcs/orderBooks";
+import Loading from "../../components/Loading/Loading";
 
 const DetailsBook = () => {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ const DetailsBook = () => {
   };
 
   if (loading) {
-    return <div className="loading">Cargando...</div>;
+    return <Loading />;
   }
 
   return (

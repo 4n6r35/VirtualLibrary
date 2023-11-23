@@ -1,4 +1,6 @@
+/* eslint-disable react/no-children-prop */
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ProtectedRoutes from "./ProtecetedRoutes"
 import { LayOut } from "../components/LayOut/LayOut";
 
 import Landing from "../pages/Landing/Landing";
@@ -11,6 +13,7 @@ import DetailsBook from "../pages/DetailsBook/DetailsBook";
 import { AuthProvider } from "../context/ctx";
 import UpdateBook from "../pages/UpdatedBook/UpdateBook";
 import BooksOrder from "../pages/BookOrder/BookOrder";
+import { NavBar, NavBarD } from "../components/NavBar/NavBar";
 
 export const RouterMain = () => {
   const router = createBrowserRouter([
@@ -18,7 +21,7 @@ export const RouterMain = () => {
       path: "/",
       element: (
         <AuthProvider>
-          <LayOut />
+          <LayOut children={<NavBar />} />
         </AuthProvider>
       ),
       errorElement: <Error404 />,
@@ -35,24 +38,28 @@ export const RouterMain = () => {
           path: "/sign-up",
           element: <SignUp />,
         },
+        {
+          path: "/",
+          element: <ProtectedRoutes/>,
+          children: [
+            {
+              path: "/books",
+              element: (
+                <AuthProvider>
+                  <LayOut children={<NavBarD />} />
+                </AuthProvider>
+              ),
+              children: [
+                { path: "/books", element: <Books /> },
+                { path: "/books/:id", element: <DetailsBook /> },
+                { path: "/books/upload", element: <UploadBook /> },
+                { path: "/books/update/:id", element: <UpdateBook /> },
+                { path: "/books/orders", element: <BooksOrder /> },
+              ],
+            },
+          ]}
       ],
-    },
-    {
-      path: "/books",
-      element: (
-        <AuthProvider>
-          <LayOut />
-        </AuthProvider>
-      ),
-      children: [
-        { path: "/books", element: <Books /> },
-        { path: "/books/:id", element: <DetailsBook /> },
-        { path: "/books/upload", element: <UploadBook /> },
-        { path: "/books/update/:id", element: <UpdateBook /> },
-        { path: "/books/visualization", element: <BooksOrder /> },
-      ],
-    },
-   
+    }
   ]);
 
   return <RouterProvider router={router} />;

@@ -1,52 +1,69 @@
-// import { useState, useEffect } from "react";
-// import { modelOrder } from "../../controllers/firebase/models/modelOrder";
-// import { getCollections } from "../../controllers/firebase/funtions/getCollections";
-// import { getData } from "../../controllers/firebase/funtions/getData";
-// import { modelBook } from "../../controllers/firebase/models/modelBooks";
+/* eslint-disable react/prop-types */
 
-// const Tabla = () => {
-//   const [datos, setDatos] = useState();
+import Button from "../Button/Button";
+import "./Table.css";
+import { useState, useEffect } from "react";
 
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const data = await getCollections("BooksOrder", modelOrder);
-//         const orderData = await Promise.all(
-//           data.map(async(bookName)=>{
-//             const name = await getData(bookName.idOrder, "Books", modelBook);
-//           })
-//         )
-//         console.log(data);
-//         setDatos(data);
-//       } catch (error) {
-//         console.error("Error al obtener los datos:", error);
-//       }
-//     };
-//     fetchData();
-//   }, []);
+const Table = ({ books, buttonBook }) => {
+  const [user, setUser] = useState();
 
-//   if (!datos || datos.length === 0) {
-//     return <p>No hay datos disponibles</p>;
-//   }
+  useEffect(() => {
+    function onEffect() {
+      const json = localStorage.getItem("user");
+      const u = JSON.parse(json);
+      setUser(u);
+    }
+    onEffect();
+  }, []);
 
-//   return (
-//     <table>
-//       <thead>
-//         <tr>
-//           <th>idBooks</th>
-//           <th>idUser</th>
-//         </tr>
-//       </thead>
-//       <tbody>
-//         {datos.map((item) => (
-//           <tr key={item.idOrder}>
-//             <td>{item.bookId}</td>
-//             <td>{item.userId}</td>
-//           </tr>
-//         ))}
-//       </tbody>
-//     </table>
-//   );
-// };
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Cover</th>
+          <th>Book</th>
+          {user?.typeUser ? <th>Email</th> : <div></div>}
+          {user?.typeUser ? <th>Username</th> : <div></div>}
 
-// export default Tabla;
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {books.map((item) => (
+          <tr key={item.id}>
+            <td>{item.id}</td>
+            <td>
+              <img className="cover" src={item.book.cover} alt="book" />
+            </td>
+            <td>
+              <p>{item.book.title}</p>
+            </td>
+
+            {user?.typeUser ? (
+              <td>
+                <p>{item.user?.email}</p>
+              </td>
+            ) : (
+              <div></div>
+            )}
+            {user?.typeUser ? (
+              <td>
+                <p>{item.user?.username}</p>
+              </td>
+            ) : (
+              <div></div>
+            )}
+
+            <td>
+              <Button text="Devolver" onClick={() => buttonBook(item.id)} />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
+
+export default Table;

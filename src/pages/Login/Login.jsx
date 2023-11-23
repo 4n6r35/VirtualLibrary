@@ -14,6 +14,11 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  
+  // const authCheck = useAuth();
+  // if (authCheck.isAuthenticated) {
+  //   return <Navigate to="/"/>
+  // }
 
   const { _login } = useAuth();
   const navigate = useNavigate();
@@ -28,7 +33,7 @@ const Login = () => {
       if (data) {
         const u = await getData(user.uid, "Users", modelUser);
         localStorage.setItem("user", JSON.stringify(u));
-        navigate("/books");
+        navigate("/books", {user});
       }
     } catch (error) {
       console.log(error);
