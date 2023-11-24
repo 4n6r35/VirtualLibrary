@@ -1,14 +1,10 @@
 import { useState } from "react";
 import "./Login.css";
 import TextInput from "../../components/TextInput/TextInput";
-import { app } from "../../controllers/firebase/conection";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useAuth } from "../../context/ctx";
 import { useNavigate } from "react-router-dom";
 import { getData } from "../../controllers/firebase/funtions/getData";
 import { modelUser } from "../../controllers/firebase/models/modelUsers";
-
-const auth = getAuth(app);
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -38,16 +34,6 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLogin = async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-      const userCredential = await signInWithPopup(auth, provider);
-      console.log("Inicio de sesión exitoso: ", userCredential.user);
-    } catch (err) {
-      console.error("Error al inicio de sesión con Google: ", err.message);
-    }
-  };
-
   return (
     <div className="login-page">
       <div className="login-container">
@@ -72,11 +58,6 @@ const Login = () => {
           </div>
           <div className="content-button">
             <button type="submit">Login</button>
-          </div>
-          <div className="content-button">
-            <button type="button" onClick={handleGoogleLogin}>
-              Gmail
-            </button>
           </div>
         </form>
       </div>
